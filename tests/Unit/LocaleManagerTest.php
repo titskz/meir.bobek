@@ -37,3 +37,14 @@ test('configured fallback locale is used when the primary locale is invalid', fu
 
     expect(LocaleManager::default())->toBe('kk');
 });
+
+test('missing valid locales causes an explicit configuration error', function () {
+    config([
+        'app.locale' => 'invalid',
+        'app.fallback_locale' => 'also-invalid',
+        'locales.available' => [],
+    ]);
+
+    expect(fn () => LocaleManager::default())
+        ->toThrow(LogicException::class, 'No valid application locale is configured.');
+});

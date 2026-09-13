@@ -5,6 +5,7 @@ namespace App\Support;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use JsonException;
+use LogicException;
 
 class LocaleManager
 {
@@ -31,7 +32,11 @@ class LocaleManager
 
         $locale = array_key_first(self::available());
 
-        return is_string($locale) ? $locale : 'kk';
+        if (is_string($locale) && self::isValid($locale)) {
+            return $locale;
+        }
+
+        throw new LogicException('No valid application locale is configured.');
     }
 
     public static function apply(string $locale): void
