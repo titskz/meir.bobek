@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { Head } from '@inertiajs/vue3';
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import SiteFooter from '@/components/site/SiteFooter.vue';
 import SiteHeader from '@/components/site/SiteHeader.vue';
 import { useTranslation } from '@/composables/useTranslation';
+import { siteAssets } from '@/lib/siteAssets';
 import type { SiteSettings } from '@/types/site';
 
 defineProps<{
@@ -45,6 +47,13 @@ onBeforeUnmount(() => revealObserver?.disconnect());
         ref="siteRoot"
         class="site site-paper min-h-dvh bg-[var(--site-cream)] text-[var(--site-ink)] antialiased"
     >
+        <Head>
+            <link rel="icon" :href="settings.favicon || siteAssets.logoIcon" />
+            <link
+                rel="apple-touch-icon"
+                :href="settings.favicon || siteAssets.logoIcon"
+            />
+        </Head>
         <a href="#site-main-content" class="site-skip-link">
             {{ t('site.a11y.skip_to_content') }}
         </a>

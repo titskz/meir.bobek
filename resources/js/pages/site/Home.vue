@@ -70,7 +70,6 @@ const teacherCardBgs = [
         <title>{{ settings.site_name }}</title>
         <meta name="description" :content="settings.meta_description || ''" />
         <meta name="keywords" :content="settings.meta_keywords || ''" />
-        <link v-if="settings.favicon" rel="icon" :href="settings.favicon" />
     </Head>
 
     <SiteLayout :settings="settings">
