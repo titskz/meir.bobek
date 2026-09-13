@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\GalleryItem;
 use App\Models\Group;
+use App\Models\Page;
+use App\Models\TeamMember;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -63,4 +66,65 @@ test('an admin can deactivate a group', function () {
         ->assertRedirect(route('admin.groups.index'));
 
     expect($group->fresh()?->is_active)->toBeFalse();
+});
+
+test('updating cms records without an image preserves existing images', function () {
+    $admin = User::factory()->admin()->create();
+    $group = Group::query()->create([
+        'title' => 'Балапан',
+        'slug' => 'balapan',
+        'image' => 'groups/existing.jpg',
+        'is_active' => true,
+    ]);
+    $gallery = GalleryItem::query()->create([
+        'title' => 'Мереке',
+        'image' => 'gallery/existing.jpg',
+        'is_active' => true,
+    ]);
+    $page = Page::query()->create([
+        'title' => 'Біз туралы',
+        'slug' => 'about',
+        'image' => 'pages/existing.jpg',
+        'is_published' => true,
+    ]);
+    $member = TeamMember::query()->create([
+        'name' => 'Маман',
+        'position' => 'Тәрбиеші',
+        'image' => 'team/existing.jpg',
+        'is_active' => true,
+    ]);
+
+    $this->actingAs($admin);
+
+    $this->put(route('admin.groups.update', $group), [
+        'title' => $group->title,
+        'slug' => $group->slug,
+        'sort_order' => 0,
+        'is_active' => '1',
+    ])->assertRedirect();
+
+    $this->put(route('admin.gallery.update', $gallery), [
+        'title' => $gallery->title,
+        'sort_order' => 0,
+        'is_active' => '1',
+    ])->assertRedirect();
+
+    $this->put(route('admin.pages.update', $page), [
+        'title' => $page->title,
+        'slug' => $page->slug,
+        'sort_order' => 0,
+        'is_published' => '1',
+    ])->assertRedirect();
+
+    $this->put(route('admin.team.update', $member), [
+        'name' => $member->name,
+        'position' => $member->position,
+        'sort_order' => 0,
+        'is_active' => '1',
+    ])->assertRedirect();
+
+    expect($group->fresh()?->image)->toBe('groups/existing.jpg')
+        ->and($gallery->fresh()?->image)->toBe('gallery/existing.jpg')
+        ->and($page->fresh()?->image)->toBe('pages/existing.jpg')
+        ->and($member->fresh()?->image)->toBe('team/existing.jpg');
 });

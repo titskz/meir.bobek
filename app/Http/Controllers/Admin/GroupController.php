@@ -52,6 +52,8 @@ class GroupController extends Controller
         if ($request->hasFile('image')) {
             MediaStorage::delete($group->image);
             $data['image'] = MediaStorage::store($request->file('image'), 'groups');
+        } else {
+            unset($data['image']);
         }
 
         $group->update($data);

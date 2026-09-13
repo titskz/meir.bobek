@@ -58,11 +58,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function configureLocale(): void
     {
-        $locale = config('app.locale');
-
-        if (LocaleManager::isValid($locale)) {
-            LocaleManager::apply($locale);
-        }
+        LocaleManager::apply(LocaleManager::default());
     }
 
     protected function configureAuthorization(): void

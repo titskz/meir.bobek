@@ -50,6 +50,8 @@ class TeamMemberController extends Controller
         if ($request->hasFile('image')) {
             MediaStorage::delete($team->image);
             $data['image'] = MediaStorage::store($request->file('image'), 'team');
+        } else {
+            unset($data['image']);
         }
 
         $team->update($data);

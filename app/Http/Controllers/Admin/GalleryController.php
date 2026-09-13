@@ -47,6 +47,8 @@ class GalleryController extends Controller
         if ($request->hasFile('image')) {
             MediaStorage::delete($gallery->image);
             $data['image'] = MediaStorage::store($request->file('image'), 'gallery');
+        } else {
+            unset($data['image']);
         }
 
         $gallery->update($data);

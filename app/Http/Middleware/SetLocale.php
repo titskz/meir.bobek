@@ -16,8 +16,7 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $defaultLocale = config('app.locale');
-        $defaultLocale = is_string($defaultLocale) ? $defaultLocale : 'ru';
+        $defaultLocale = LocaleManager::default();
         $locale = $request->cookie('locale', $defaultLocale);
 
         if (! is_string($locale) || ! LocaleManager::isValid($locale)) {

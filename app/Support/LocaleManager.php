@@ -4,6 +4,7 @@ namespace App\Support;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use JsonException;
 
 class LocaleManager
 {
@@ -18,6 +19,19 @@ class LocaleManager
     public static function isValid(string $locale): bool
     {
         return array_key_exists($locale, self::available());
+    }
+
+    public static function default(): string
+    {
+        foreach ([config('app.locale'), config('app.fallback_locale')] as $locale) {
+            if (is_string($locale) && self::isValid($locale)) {
+                return $locale;
+            }
+        }
+
+        $locale = array_key_first(self::available());
+
+        return is_string($locale) ? $locale : 'kk';
     }
 
     public static function apply(string $locale): void
@@ -57,12 +71,22 @@ class LocaleManager
             return [];
         }
 
-        $decoded = json_decode(
-            $contents,
-            true,
-            512,
-            JSON_THROW_ON_ERROR,
-        );
+        try {
+            $decoded = json_decode(
+                $contents,
+                true,
+                512,
+                JSON_THROW_ON_ERROR,
+            );
+        } catch (JsonException $exception) {
+            report($exception);
+            Cache::forever($cacheKey, [
+                'version' => $version,
+                'translations' => [],
+            ]);
+
+            return [];
+        }
 
         if (! is_array($decoded)) {
             return [];

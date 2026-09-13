@@ -57,6 +57,8 @@ class PageController extends Controller
         if ($request->hasFile('image')) {
             MediaStorage::delete($page->image);
             $data['image'] = MediaStorage::store($request->file('image'), 'pages');
+        } else {
+            unset($data['image']);
         }
 
         $page->update($data);
