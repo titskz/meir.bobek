@@ -1,0 +1,65 @@
+@layer base {
+    .site {
+        --site-cream: #fffdf2;
+        --site-purple: #7c4dff;
+        --site-purple-deep: #6a3df0;
+        --site-purple-hover: #6340e8;
+        --site-purple-light: #f0ebff;
+        --site-purple-muted: #ede9fe;
+        --site-navy: #2d3561;
+        --site-nav: #2d3561;
+        --site-muted: #2d3561;
+        --site-ink: #2d3561;
+        --site-green-hand: #22c55e;
+        --site-card-yellow: #fffbeb;
+        --site-card-mint: #ecfdf5;
+        --site-card-pink: #fdf2f8;
+        --site-border: #e8e4df;
+        --site-shadow-soft: 0 2px 4px rgb(45 53 97 / 0.04);
+        --site-shadow-card:
+            0 2px 4px rgb(45 53 97 / 0.03), 0 8px 16px rgb(45 53 97 / 0.04),
+            0 20px 40px rgb(124 77 255 / 0.08);
+        --site-shadow-btn:
+            0 4px 0 var(--site-purple-deep), 0 8px 20px rgb(124 77 255 / 0.35);
+        --site-shadow-btn-hover:
+            0 2px 0 var(--site-purple-deep), 0 6px 16px rgb(124 77 255 / 0.4);
+        --site-shadow-hero: 0 24px 48px rgb(45 53 97 / 0.12);
+
+        color: var(--site-ink);
+        font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif !important;
+        font-size: 16px;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .site *:not(.site-hand):not(.site-hand *) {
+        font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif !important;
+    }
+
+    .site h1,
+    .site h2,
+    .site h3,
+    .site h4,
+    .site p,
+    .site a,
+    .site button,
+    .site span,
+    .site .site-display {
+        font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif !important;
+    }
+
+    .site h1,
+    .site h2,
+    .site h3,
+    .site .site-display {
+        letter-spacing: -0.025em;
+    }
+
+    .site .site-hand,
+    .site .site-hand * {
+        font-family: 'Caveat', 'Marck Script', cursive !important;
+        font-weight: 600;
+        letter-spacing: 0;
+    }
+}

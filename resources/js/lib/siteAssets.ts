@@ -1,0 +1,17 @@
+export const siteAssets = {
+    logo: '/images/m-logo.png',
+    logoIcon: '/images/m-icon.png',
+    hero: '/images/hero.png',
+    heroTextBottom: '/images/hero-text-bottom.png',
+    feature1: '/images/feature-1.png',
+    feature2: '/images/feature-2.png',
+    feature3: '/images/feature-3.png',
+    flowers: '/images/flowers.png',
+    boy: '/images/boy.png',
+    girl: '/images/girl.png',
+    grass: '/images/glass.png',
+    purpleHeart: '/images/purple_heart.png',
+    greenHeart: '/images/green_heart.png',
+    star: '/images/star.png',
+    star2: '/images/star_2.png',
+} as const;
