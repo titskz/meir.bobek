@@ -108,24 +108,19 @@ const teacherCardBgs = [
                         class="absolute right-5 bottom-5 hidden h-auto w-[180px] max-w-none lg:block"
                     />
 
-                    <div class="grid items-center gap-0 lg:grid-cols-2">
-                        <div class="mx-auto w-[360px] max-w-full">
+                    <div class="site-manager-grid">
+                        <div class="site-manager-photo">
                             <img
                                 v-if="settings.manager_photo"
                                 :src="settings.manager_photo"
                                 :alt="settings.manager_name"
-                                class="aspect-square w-full rounded-[42px] object-cover shadow-[0_8px_32px_rgb(124_92_255_/_0.12)] ring-4 ring-white"
                             />
                         </div>
-                        <div class="text-center lg:text-left">
-                            <h3
-                                class="site-display text-[36px] font-black text-[var(--site-purple)] lg:text-[48px]"
-                            >
+                        <div class="site-manager-copy">
+                            <h3 class="site-display site-manager-name">
                                 {{ settings.manager_name }}
                             </h3>
-                            <p
-                                class="text-[18px] font-semibold text-[var(--site-ink)]"
-                            >
+                            <p class="site-manager-position">
                                 {{ settings.manager_position }}
                             </p>
                             <div class="site-quote">
