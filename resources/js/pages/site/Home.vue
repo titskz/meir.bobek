@@ -163,17 +163,12 @@ const teacherCardBgs = [
                         class="site-teacher-card"
                         :class="teacherCardBgs[i % 3]"
                     >
-                        <div class="relative mx-auto size-[144px]">
+                        <div class="site-teacher-photo">
                             <img
                                 :src="member.image_url || ''"
                                 :alt="member.name"
-                                class="size-[144px] rounded-full object-cover shadow-[0_4px_16px_rgb(0_0_0_/_0.08)] ring-4 ring-white"
                             />
-                            <img
-                                :src="siteAssets.purpleHeart"
-                                alt=""
-                                class="absolute -top-1 -right-1 size-8"
-                            />
+                            <img :src="siteAssets.purpleHeart" alt="" />
                         </div>
                         <h3>{{ member.name }}</h3>
                         <p>{{ member.position }}</p>

@@ -1515,6 +1515,38 @@
         box-shadow: var(--site-shadow-card);
     }
 
+    .site-teacher-photo {
+        position: relative;
+        width: 132px;
+        height: 176px;
+        margin-inline: auto;
+    }
+
+    .site-teacher-photo > img:first-child {
+        width: 100%;
+        height: 100%;
+        border: 4px solid #fff;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 18%;
+        box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+    }
+
+    .site-teacher-photo > img:last-child {
+        position: absolute;
+        top: 2px;
+        right: -4px;
+        width: 32px;
+        height: 32px;
+    }
+
+    @media (min-width: 768px) {
+        .site-teacher-photo {
+            width: 148px;
+            height: 196px;
+        }
+    }
+
     .site-teacher-card h3 {
         margin-top: 20px;
         font-size: 18px;
